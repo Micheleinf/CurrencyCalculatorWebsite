@@ -1,0 +1,76 @@
+body {
+    background-image: url("/img/money.jpg");
+}
+
+.title {
+    text-align: center;
+    margin: 1em;
+    color: rgb(0, 0, 0);
+}
+
+.col-8 {
+    background-color: rgba(224, 224, 224, 0.815);
+}
+
+.col-2 {
+    background-color: rgba(224, 224, 224, 0.815);
+}
+
+.col-1 {
+    background-color: rgba(224, 224, 224, 0.815);
+}
+
+.row {
+    margin: 0px;
+    height: 100%;
+}
+
+.text {
+    color: black;
+}
+
+.field {
+    border-radius: 10px;
+}
+
+.text2 {
+    color: black;
+}
+
+.text3 {
+    color: black;
+}
+
+.output {
+    color: white;
+}
+
+.originCurrency {
+    width: 4em;
+    border-radius: 0.5em;
+}
+
+.destCurrency {
+    width: 4em;
+    border-radius: 0.5em;
+}
+
+.amountInput {
+    width: 8em;
+    border-radius: 0.5em;
+}
+
+.text {
+    width: 100px;
+}
+
+.text3 {
+    width: 100px;
+}
+
+.calculateButton {
+    border-radius: 0.5em;
+    background-color: white;
+    border-color: white;
+    margin: 1em;
+}

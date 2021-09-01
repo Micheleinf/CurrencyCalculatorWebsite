@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <title>Währungsumrechner</title>
+</head>
+
+<body>
+
+    <script>
+        let orgCurrency;
+        let toCurrency;
+        let value;
+        var reusult = 0;
+
+        $(document).ready(function() {
+            $("#day").click(function() {
+                day = true;
+                evening = false;
+                $("#zeit").text("Tag");
+
+            });
+        });
+
+
+
+        $(document).ready(function() {
+            $("#evening").click(function() {
+                day = false;
+                evening = true;
+                $("#zeit").text("Abend");
+
+
+            });
+        });
+
+
+
+        $(document).ready(function() {
+            $(".calculateButton").click(function() {
+
+                let endpoint = 'https://v6.exchangerate-api.com/v6/6f8acda6405b37ec9f579cee'
+                let apiKey = '6f8acda6405b37ec9f579cee'
+
+                orgCurrency = $(".originCurrency").val().toUpperCase();
+                toCurrency = $(".destCurrency").val().toUpperCase();
+                value = $(".amountInput").val();
+
+
+                var request = new XMLHttpRequest();
+
+                request.open("GET", endpoint + "/latest/" + orgCurrency, true);
+
+                request.onload = function() {
+                    if (request.status >= 200 && request.status < 400) {
+                        var data = JSON.parse(this.response);
+                        // do stuff with data
+                        console.log(data);
+
+                        $.each(data.conversion_rates, function(key, val) {
+                            var number = val;
+                            if (key == toCurrency) {
+                                reusult = number * value;
+                                console.log("reusultat: " + reusult);
+                                $(".amountInput").val(reusult);
+                            } else {}
+                        })
+
+
+                    }
+
+                };
+
+                request.send();
+
+
+            });
+        });
+    </script>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <h1 class="title">Währungsumrechner</h1>
+                <p></p>
+                <p></p>
+            </div>
+            <div class="col-2"></div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-2">
+
+            </div>
+
+            <div class="col-1"></div>
+            <div class="col-2">
+
+
+                <label for="vname" class="text">Von:
+                    <input class="originCurrency" name="vname">
+                </label>
+
+                <label for="vname" class="text3">Nach:
+                    <input class="destCurrency" name="vname3">
+                </label>
+
+            </div>
+
+            <div class="col-2"></div>
+            <div class="col-2">
+
+                <label for="vname" class="text2">Betrag:
+                    <input class="amountInput" name="vname2">
+                </label>
+
+                <p></p>
+
+                <button class="calculateButton">Berechnen</button>
+
+            </div>
+
+            <div class="col-2"></div>
+            <p></p>
+
+            <p class="output"> </p>
+
+
+
+        </div>
+
+        <div class="col-2"></div>
+    </div>
+    </div>
+</body>
+
+</html>
