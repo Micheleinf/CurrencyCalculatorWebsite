@@ -1,7 +1,9 @@
 let orgCurrency;
 let toCurrency;
 let value;
+let swissFrancs = "CHF";
 var reusult = 0;
+var reusult2 = 0;
 
 $(document).ready(function() {
     $("#day").click(function() {
@@ -29,12 +31,17 @@ $(document).ready(function() {
 $(document).ready(function() {
     $(".calculateButton").click(function() {
 
+        //API-Deklaration
+
         let endpoint = 'https://v6.exchangerate-api.com/v6/6f8acda6405b37ec9f579cee'
         let apiKey = '6f8acda6405b37ec9f579cee'
+
+        //Werte auslesen
 
         orgCurrency = $(".originCurrency").val().toUpperCase();
         toCurrency = $(".destCurrency").val().toUpperCase();
         value = $(".amountInput").val();
+
 
 
         var request = new XMLHttpRequest();
@@ -56,12 +63,22 @@ $(document).ready(function() {
                     } else {}
                 })
 
+                $.each(data.conversion_rates, function(key, val) {
+                    var number = val;
+                    if (key == swissFrancs) {
+                        reusult2 = number * value;
+                        console.log("reusultat: " + reusult2);
+                        $(".swissFrancsOutput").val(reusult2);
+                    } else {}
+                })
+
 
             }
-
         };
 
+
         request.send();
+
 
 
     });
