@@ -34,7 +34,7 @@ $(document).ready(function() {
         //API-Deklaration
 
         let endpoint = 'https://v6.exchangerate-api.com/v6/6f8acda6405b37ec9f579cee'
-        let apiKey = '6f8acda6405b37ec9f579cee'
+        let apiKey = 'insert your API-Key here'
 
         //Werte auslesen
 
